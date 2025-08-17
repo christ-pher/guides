@@ -1,5 +1,7 @@
 # Self-Hosted KMS
 
+Configure and deploy a local KMS server.
+
 ## Server Setup
 
 1. Setup an Ubuntu server VM with the docker snap package
