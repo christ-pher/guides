@@ -61,24 +61,34 @@ networks:
 
 - Easy way (might not work)
 ```shell
-slmgr /ipk D764K-2NDRG-47T6Q-P8T8W-YP6DF
+cscript slmgr.vbs /ipk PRODUCT_KEY
 ```
 
 - Upgrading from eval to full version (what i had to do)
 ```shell
-DISM /online /Set-Edition:ServerDatacenter /ProductKey:D764K-2NDRG-47T6Q-P8T8W-YP6DF /AcceptEula
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:PRODUCT_KEY /AcceptEula
 ```
 
-## Activating Server
+## Activating Server (via slmgr)
+
+1. Add your KMS server
+
+```shell
+cscript slmgr.vbs /skms ip:port
+```
+
+2. Activate KMS server
+
+```shell
+cscript slmgr.vbs /ato
+```
+
+## Activating Server (via Registry)
 
 1. Add your KMS server information to server via registry
 
 NOTE: Replace **KMS_IP** and **KMS_PORT**
 
-```shell
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" -Name "KeyManagementServiceName" -Value "KMS_IP"; Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" -Name "KeyManagementServicePort" -Value "KMS_PORT"; slmgr /ato
-```
-or
 ```shell
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" -Name "KeyManagementServiceName" -Value "KMS_IP"
 
