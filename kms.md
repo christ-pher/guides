@@ -57,8 +57,6 @@ networks:
 
 ## Installing License
 
-### Windows Server 25
-
 - Easy way (might not work)
 ```shell
 cscript slmgr.vbs /ipk PRODUCT_KEY
@@ -66,7 +64,7 @@ cscript slmgr.vbs /ipk PRODUCT_KEY
 
 - Upgrading from eval to full version (what i had to do)
 ```shell
-DISM /online /Set-Edition:ServerDatacenter /ProductKey:PRODUCT_KEY /AcceptEula
+DISM /online /Set-Edition:EDITION_LABEL /ProductKey:PRODUCT_KEY /AcceptEula
 ```
 
 ## Activating Server (via slmgr)
@@ -81,6 +79,12 @@ cscript slmgr.vbs /skms ip:port
 
 ```shell
 cscript slmgr.vbs /ato
+```
+
+3. Verify activation
+
+```shell
+cscript slmgr.vbs /dlv
 ```
 
 ## Activating Server (via Registry)
@@ -99,8 +103,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatfor
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform" -Name "KeyManagementServicePort" -Value "KMS_PORT"
 ```
 
-2. Activate server
+2. Activate KMS server
 
 ```shell
-slmgr /ato
+cscript slmgr.vbs /ato
 ```
